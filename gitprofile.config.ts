@@ -51,7 +51,9 @@ const CONFIG = {
       ],
     },
   },
-  seo: { title: 'Portfolio of Ariful Alam', description: '', imageURL: '' },
+  seo: { title: 'Portfolio of Milan Peter',
+        description: '',
+        imageURL: '' },
   social: {
     linkedin: 'ariful-alam',
     x: 'arif_szn',
