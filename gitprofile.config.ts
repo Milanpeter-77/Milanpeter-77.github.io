@@ -13,8 +13,8 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      header: 'Github Projects',
-      mode: 'automatic', // Mode can be: 'automatic' or 'manual'
+      header: 'GitHub Projects',
+      mode: 'manual', // Mode can be: 'automatic' or 'manual'
       automatic: {
         sortBy: 'stars', // Sort projects by 'stars' or 'updated'
         limit: 8, // How many projects to display.
@@ -25,11 +25,14 @@ const CONFIG = {
       },
       manual: {
         // Properties for manually specifying projects
-        projects: ['arifszn/gitprofile', 'arifszn/pandora'], // List of repository names to display. example: ['arifszn/my-project1', 'arifszn/my-project2']
+        projects: ['Milanpeter-77/Project-Trade-Recommendation-Backtesting-System',
+                   'Milanpeter-77/Project-Daily-FX-Rates-Push-Notification',
+                   'Milanpeter-77/Project-Credit-Risk-Analysis',
+                   'Milanpeter-77/Project-MACD-Long-Trading-Strategy'], // List of repository names to display. example: ['arifszn/my-project1', 'arifszn/my-project2']
       },
     },
     external: {
-      header: 'My Projects',
+      header: 'Articles',
       // To hide the `External Projects` section, keep it empty.
       projects: [
         {
@@ -55,9 +58,9 @@ const CONFIG = {
         description: '',
         imageURL: '' },
   social: {
-    linkedin: 'ariful-alam',
-    x: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
+    linkedin: 'milan-peter',
+    x: '',
+    mastodon: '',
     researchGate: '',
     facebook: '',
     instagram: '',
@@ -68,70 +71,63 @@ const CONFIG = {
     dribbble: '',
     behance: '',
     medium: 'arifszn',
-    dev: 'arifszn',
+    dev: '',
     stackoverflow: '', // example: '1/jeff-atwood'
     discord: '',
     telegram: '',
-    website: 'https://www.arifszn.com',
+    website: '',
     phone: '',
-    email: 'arifulalamszn@gmail.com',
+    email: 'peter.milan77@gmail.com',
   },
   resume: {
     fileUrl:
       'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
-    'PHP',
-    'Laravel',
-    'JavaScript',
-    'React.js',
-    'Node.js',
-    'Nest.js',
-    'MySQL',
-    'PostgreSQL',
-    'Git',
-    'Docker',
-    'PHPUnit',
-    'CSS',
-    'Antd',
-    'Tailwind',
+    'Python',
+    'R',
+    'Stata',
+    'SAS',
+    'SQL',
+    'Excel',
   ],
   experiences: [
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'September 2021',
+      company: 'MBH Investment Bank',
+      position: 'Junior Equity Analyst',
+      from: 'August 2024',
       to: 'Present',
-      companyLink: 'https://example.com',
+      companyLink: 'www.mbhbefektetesibank.hu',
     },
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'July 2019',
-      to: 'August 2021',
-      companyLink: 'https://example.com',
+      company: 'K&H Bank',
+      position: 'Credit Risk Modelling Intern',
+      from: 'February 2024',
+      to: 'May 2024',
+      companyLink: '',
+    },
+    {
+      company: 'OTP Bank',
+      position: 'Country & Counterparty Risk Analyst Intern',
+      from: 'July 2022',
+      to: 'August 2023',
+      companyLink: '',
     },
   ],
   certifications: [
     {
-      name: 'Lorem ipsum',
-      body: 'Lorem ipsum dolor sit amet',
-      year: 'March 2022',
-      link: 'https://example.com',
+      name: 'Bloomberg Finance Fundamentals Certificate',
+      body: 'Certificate ID: AXauuyd9sWnHChqQFGeWAWam',
+      year: 'September 2024',
+      link: 'https://portal.bloombergforeducation.com/certificates/AXauuyd9sWnHChqQFGeWAWam',
     },
   ],
   educations: [
     {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2015',
-      to: '2019',
-    },
-    {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2012',
-      to: '2014',
+      institution: 'Corvinus University of Budapest',
+      degree: 'Bachelor of Science in Business Administration and Management',
+      from: '2020',
+      to: '2024',
     },
   ],
   publications: [
@@ -157,7 +153,7 @@ const CONFIG = {
   // Display articles from your medium or dev account. (Optional)
   blog: {
     source: 'dev', // medium | dev
-    username: 'arifszn', // to hide blog section, keep it empty
+    username: '', // to hide blog section, keep it empty
     limit: 2, // How many articles to display. Max is 10.
   },
   googleAnalytics: {
@@ -166,7 +162,7 @@ const CONFIG = {
   // Track visitor interaction and behavior. https://www.hotjar.com
   hotjar: { id: '', snippetVersion: 6 },
   themeConfig: {
-    defaultTheme: 'lofi',
+    defaultTheme: 'light',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode
@@ -220,12 +216,7 @@ const CONFIG = {
     ],
   },
 
-  // Optional Footer. Supports plain text or HTML.
-  footer: `Made with <a 
-      class="text-primary" href="https://github.com/arifszn/gitprofile"
-      target="_blank"
-      rel="noreferrer"
-    >GitProfile</a> and ❤️`,
+
 
   enablePWA: true,
 };
