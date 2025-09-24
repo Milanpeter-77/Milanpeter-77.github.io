@@ -13,14 +13,15 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      header: 'GitHub Projects',
-      mode: 'manual', // Mode can be: 'automatic' or 'manual'
+      header: 'Coding & Research Projects',
+      mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
-        sortBy: 'stars', // Sort projects by 'stars' or 'updated'
+        sortBy: 'updated', // Sort projects by 'stars' or 'updated'
         limit: 8, // How many projects to display.
         exclude: {
-          forks: false, // Forked projects will not be displayed if set to true.
-          projects: [], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
+          forks: true, // Forked projects will not be displayed if set to true.
+          projects: ['Milanpeter-77/Milanpeter-77.github.io',
+                     'Milanpeter-77/Milanpeter-77'], // These projects will not be displayed. example: ['arifszn/my-project1', 'arifszn/my-project2']
         },
       },
       manual: {
@@ -55,7 +56,7 @@ const CONFIG = {
     },
   },
   seo: { title: 'Portfolio of Milan Peter',
-        description: '',
+        description: 'Where is this text exactly?',
         imageURL: '' },
   social: {
     linkedin: 'milan-peter',
@@ -81,7 +82,7 @@ const CONFIG = {
   },
   resume: {
     fileUrl:
-      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
+      'https://drive.google.com/file/d/1JzHG7UOzfHiO7OX2q95oKDvFuiWsi37b/view?usp=sharing', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
     'Python',
@@ -124,6 +125,12 @@ const CONFIG = {
   ],
   educations: [
     {
+      institution: 'Vrije Universiteit Amsterdam (VU)',
+      degree: 'Master of Science in Quantitative Finance',
+      from: '2025',
+      to: '2026',
+    },
+    {
       institution: 'Corvinus University of Budapest',
       degree: 'Bachelor of Science in Business Administration and Management',
       from: '2020',
@@ -132,22 +139,13 @@ const CONFIG = {
   ],
   publications: [
     {
-      title: 'Publication Title',
+      title: '',
       conferenceName: '',
-      journalName: 'Journal Name',
-      authors: 'John Doe, Jane Smith',
-      link: 'https://example.com',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      title: 'Publication Title',
-      conferenceName: 'Conference Name',
       journalName: '',
-      authors: 'John Doe, Jane Smith',
-      link: 'https://example.com',
+      authors: '',
+      link: '',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        '',
     },
   ],
   // Display articles from your medium or dev account. (Optional)
@@ -162,11 +160,11 @@ const CONFIG = {
   // Track visitor interaction and behavior. https://www.hotjar.com
   hotjar: { id: '', snippetVersion: 6 },
   themeConfig: {
-    defaultTheme: 'light',
+    defaultTheme: 'cmyk',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode
-    disableSwitch: false,
+    disableSwitch: true,
 
     // Should use the prefers-color-scheme media-query,
     // using user system preferences, instead of the hardcoded defaultTheme
