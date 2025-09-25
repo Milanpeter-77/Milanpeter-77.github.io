@@ -17,7 +17,7 @@ const CONFIG = {
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
         sortBy: 'updated', // Sort projects by 'stars' or 'updated'
-        limit: 8, // How many projects to display.
+        limit: 12, // How many projects to display.
         exclude: {
           forks: true, // Forked projects will not be displayed if set to true.
           projects: ['Milanpeter-77/Milanpeter-77.github.io',
@@ -33,7 +33,7 @@ const CONFIG = {
       },
     },
     external: {
-      header: 'Articles',
+      header: '',
       // To hide the `External Projects` section, keep it empty.
       projects: [
         {
@@ -88,9 +88,12 @@ const CONFIG = {
     'Python',
     'R',
     'Stata',
-    'SAS',
+    'LaTeX',
     'SQL',
     'Excel',
+    'VBA',
+    'Bloomberg Terminal',
+    'LSEG Data & Analytics'
   ],
   experiences: [
     {
