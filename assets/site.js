@@ -3,7 +3,9 @@
       Safari and Firefox can't run an SVG filter as a
       backdrop-filter, so there the glass stays frosted —
       which still looks right. This only adds the bent edges.
-   2. Title block + sheet index that follow the scroll.
+   2. Light / dark appearance switch.
+   3. Depth: titles and glass drift slightly slower than the paper.
+   4. Title block that follows the scroll.
    ========================================================== */
 
 (function () {
@@ -119,19 +121,102 @@
     glass.forEach(function (el) { ro.observe(el); });
   }
 
-  // ---------- 2. Title block + sheet index ----------
+  // ---------- 2. Appearance: Automatic → Light → Dark ----------
+
+  var root = document.documentElement;
+  var LABELS = { auto: "Appearance: Automatic", light: "Appearance: Light", dark: "Appearance: Dark" };
+  var NEXT = { auto: "light", light: "dark", dark: "auto" };
+  var systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function currentChoice() { return root.getAttribute("data-choice") || "auto"; }
+
+  function applyChoice(choice, save) {
+    root.setAttribute("data-choice", choice);
+    if (choice === "auto") root.removeAttribute("data-theme");
+    else root.setAttribute("data-theme", choice);
+    if (save) {
+      try { localStorage.setItem("theme", choice); } catch (e) { /* private mode: fine */ }
+    }
+    document.querySelectorAll(".theme-toggle").forEach(function (b) {
+      b.setAttribute("aria-label", LABELS[choice]);
+      b.setAttribute("title", LABELS[choice]);
+    });
+    if (themeMeta) {
+      var dark = choice === "dark" || (choice === "auto" && systemDark.matches);
+      themeMeta.setAttribute("content", dark ? "#111821" : "#eef4fb");
+    }
+  }
+
+  document.querySelectorAll(".theme-toggle").forEach(function (b) {
+    b.addEventListener("click", function () { applyChoice(NEXT[currentChoice()], true); });
+  });
+  if (systemDark.addEventListener) {
+    systemDark.addEventListener("change", function () { applyChoice(currentChoice(), false); });
+  }
+  applyChoice(currentChoice(), false);
+
+  // ---------- 3. Depth: titles and glass drift a little slower than the paper ----------
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var DEPTHS = [
+    // [selector, depth]  — 0 = moves with the page; 0.1 = 10% slower
+    [".hero > .eyebrow", 0.14],
+    [".hero > h1", 0.12],
+    [".hero > .lede", 0.09],
+    [".hero > .spec", 0.07],
+    ["section > .eyebrow, section > h1, section > h2, section > .lede, section > p.muted, section > .updated", 0.08],
+    [".app-card, .panel", 0.04]
+  ];
+  var layers = [];
+
+  if (!reduceMotion) {
+    DEPTHS.forEach(function (pair) {
+      document.querySelectorAll(pair[0]).forEach(function (el) {
+        if (el.hasAttribute("data-depth")) return; // first match wins
+        el.setAttribute("data-depth", pair[1]);
+        layers.push({ el: el, depth: pair[1], top: 0, height: 0, shift: 0 });
+      });
+    });
+  }
+
+  function measure() {
+    var y = window.scrollY;
+    layers.forEach(function (l) {
+      var r = l.el.getBoundingClientRect();
+      l.top = r.top + y - l.shift; // position without our own shift
+      l.height = r.height;
+    });
+  }
+
+  function drift() {
+    var y = window.scrollY;
+    var mid = window.innerHeight / 2;
+    layers.forEach(function (l) {
+      // 0 when the element is in the middle of the screen, so the layout
+      // there is exactly as designed; it lags a little above and below.
+      var center = l.top + l.height / 2 - y;
+      var shift = (mid - center) * l.depth;
+      shift = Math.max(-90, Math.min(90, shift));
+      l.shift = shift;
+      l.el.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
+    });
+  }
+
+  // ---------- 4. Title block ----------
 
   var sections = Array.prototype.slice.call(document.querySelectorAll("[data-sheet]"));
   var sheetName = document.getElementById("tb-sheet");
   var sheetNo = document.getElementById("tb-no");
   var yReadout = document.getElementById("tb-y");
-  var indexLinks = Array.prototype.slice.call(document.querySelectorAll(".sheet-index a, .nav a.link[href^='#']"));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a.link[href^='#']"));
   var total = sections.length;
 
   function pad(n, len) { n = String(n); while (n.length < len) n = "0" + n; return n; }
 
   function onScroll() {
     var y = window.scrollY;
+    if (layers.length) drift();
     if (yReadout) yReadout.textContent = pad(Math.round(y), 5);
 
     if (!sections.length) return;
@@ -146,7 +231,7 @@
     var i = sections.indexOf(current) + 1;
     if (sheetName) sheetName.textContent = current.getAttribute("data-sheet");
     if (sheetNo) sheetNo.textContent = pad(i, 2) + " / " + pad(total, 2);
-    indexLinks.forEach(function (a) {
+    navLinks.forEach(function (a) {
       a.classList.toggle("is-active", a.getAttribute("href") === "#" + current.id);
     });
   }
@@ -158,8 +243,12 @@
       requestAnimationFrame(function () { ticking = false; onScroll(); });
     }
   }, { passive: true });
-  window.addEventListener("resize", onScroll);
-  onScroll();
+
+  function remeasure() { measure(); onScroll(); }
+  window.addEventListener("resize", remeasure);
+  window.addEventListener("load", remeasure);       // after images and fonts
+  if (window.ResizeObserver) new ResizeObserver(remeasure).observe(document.body);
+  remeasure();
 
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

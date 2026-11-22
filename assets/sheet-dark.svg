@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="2000" viewBox="0 0 1440 2000" fill="none" stroke="#a9caf2" stroke-linecap="round" stroke-linejoin="round" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="11" letter-spacing="1.5">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9" stroke="#a9caf2" stroke-opacity=".6" fill="none"/>
+    </marker>
+  </defs>
+
+  <!-- ======== Phone, front view, with dimensions (top right) ======== -->
+  <g stroke-opacity=".42" stroke-width="1.4" transform="translate(1110 140)">
+    <rect x="0" y="0" width="210" height="432" rx="42"/>
+    <rect x="9" y="9" width="192" height="414" rx="34" stroke-opacity=".6"/>
+    <rect x="76" y="22" width="58" height="17" rx="8.5"/>
+    <path d="M-3 96 v26 M-3 140 v44 M-3 196 v44 M213 150 v70"/>
+    <!-- centre lines -->
+    <path d="M105 -30 V462 M-30 216 H240" stroke-dasharray="14 5 3 5" stroke-opacity=".28" stroke-width="1"/>
+    <!-- width -->
+    <path d="M0 -14 v-26 M210 -14 v-26" stroke-opacity=".35" stroke-width="1"/>
+    <path d="M6 -30 H204" marker-start="url(#a)" marker-end="url(#a)" stroke-width="1"/>
+    <!-- height -->
+    <path d="M224 0 h26 M224 432 h26" stroke-opacity=".35" stroke-width="1"/>
+    <path d="M240 6 V426" marker-start="url(#a)" marker-end="url(#a)" stroke-width="1"/>
+  </g>
+  <g fill="#a9caf2" fill-opacity=".55" stroke="none" transform="translate(1110 140)">
+    <text x="105" y="-38" text-anchor="middle">71.5</text>
+    <text x="262" y="220" transform="rotate(90 262 220)" text-anchor="middle">147.6</text>
+    <text x="0" y="470">DET. A — PHONE, FRONT</text>
+    <text x="0" y="486" fill-opacity=".35">SCALE 1:1 · R 42</text>
+  </g>
+
+  <!-- ======== Registration marks ======== -->
+  <g stroke-opacity=".5" stroke-width="1">
+    <path d="M60 60 h24 M72 48 v24"/><circle cx="72" cy="60" r="7"/>
+    <path d="M1356 1940 h24 M1368 1928 v24"/><circle cx="1368" cy="1940" r="7"/>
+    <path d="M60 1940 h24 M72 1928 v24"/>
+    <path d="M700 980 h16 M708 972 v16" stroke-opacity=".35"/>
+    <path d="M380 420 h16 M388 412 v16" stroke-opacity=".35"/>
+    <path d="M1010 1690 h16 M1018 1682 v16" stroke-opacity=".35"/>
+  </g>
+
+  <!-- ======== Ruler along the left edge ======== -->
+  <g stroke-opacity=".32" stroke-width="1">
+    <path d="M30 0 V2000"/>
+    <path d="M30 0h10 M30 24h5 M30 48h5 M30 72h5 M30 96h5 M30 120h10 M30 144h5 M30 168h5 M30 192h5 M30 216h5 M30 240h10 M30 264h5 M30 288h5 M30 312h5 M30 336h5 M30 360h10 M30 384h5 M30 408h5 M30 432h5 M30 456h5 M30 480h10 M30 504h5 M30 528h5 M30 552h5 M30 576h5 M30 600h10 M30 624h5 M30 648h5 M30 672h5 M30 696h5 M30 720h10 M30 744h5 M30 768h5 M30 792h5 M30 816h5 M30 840h10 M30 864h5 M30 888h5 M30 912h5 M30 936h5 M30 960h10 M30 984h5 M30 1008h5 M30 1032h5 M30 1056h5 M30 1080h10 M30 1104h5 M30 1128h5 M30 1152h5 M30 1176h5 M30 1200h10 M30 1224h5 M30 1248h5 M30 1272h5 M30 1296h5 M30 1320h10 M30 1344h5 M30 1368h5 M30 1392h5 M30 1416h5 M30 1440h10 M30 1464h5 M30 1488h5 M30 1512h5 M30 1536h5 M30 1560h10 M30 1584h5 M30 1608h5 M30 1632h5 M30 1656h5 M30 1680h10 M30 1704h5 M30 1728h5 M30 1752h5 M30 1776h5 M30 1800h10 M30 1824h5 M30 1848h5 M30 1872h5 M30 1896h5 M30 1920h10 M30 1944h5 M30 1968h5 M30 1992h5"/>
+  </g>
+
+  <!-- ======== Mac window, with sidebar callout (left, middle) ======== -->
+  <g stroke-opacity=".4" stroke-width="1.4" transform="translate(150 720)">
+    <rect x="0" y="0" width="560" height="350" rx="16"/>
+    <path d="M190 0 V350" stroke-opacity=".3"/>
+    <path d="M0 52 H560" stroke-opacity=".22" stroke-dasharray="4 6"/>
+    <circle cx="24" cy="24" r="6.5"/><circle cx="46" cy="24" r="6.5"/><circle cx="68" cy="24" r="6.5"/>
+    <rect x="18" y="74" width="150" height="26" rx="8" stroke-opacity=".3"/>
+    <path d="M30 124 h110 M30 152 h90 M30 180 h120 M30 208 h70" stroke-opacity=".25"/>
+    <rect x="220" y="80" width="310" height="150" rx="12" stroke-opacity=".3"/>
+    <path d="M220 262 h240 M220 290 h300 M220 318 h180" stroke-opacity=".22"/>
+    <!-- callout -->
+    <circle cx="96" cy="300" r="20" stroke-opacity=".5"/>
+    <path d="M110 314 L170 400 H300" stroke-width="1"/>
+  </g>
+  <g fill="#a9caf2" fill-opacity=".55" stroke="none" transform="translate(150 720)">
+    <text x="176" y="394">SIDEBAR · 190 PT</text>
+    <text x="0" y="380" fill-opacity=".35">DET. B — MAC WINDOW</text>
+  </g>
+
+  <!-- ======== App icon construction grid (right, lower) ======== -->
+  <g stroke-opacity=".38" stroke-width="1.2" transform="translate(1000 1160)">
+    <rect x="0" y="0" width="300" height="300" rx="68"/>
+    <circle cx="150" cy="150" r="150" stroke-opacity=".2"/>
+    <circle cx="150" cy="150" r="110" stroke-opacity=".3"/>
+    <circle cx="150" cy="150" r="56" stroke-opacity=".3"/>
+    <rect x="40" y="40" width="220" height="220" rx="14" stroke-opacity=".22"/>
+    <rect x="60" y="20" width="180" height="260" stroke-opacity=".18"/>
+    <rect x="20" y="60" width="260" height="180" stroke-opacity=".18"/>
+    <path d="M0 0 L300 300 M300 0 L0 300 M150 0 V300 M0 150 H300" stroke-opacity=".18" stroke-dasharray="3 5"/>
+  </g>
+  <g fill="#a9caf2" fill-opacity=".55" stroke="none" transform="translate(1000 1160)">
+    <text x="0" y="330">DET. C — ICON GRID</text>
+    <text x="0" y="346" fill-opacity=".35">1024 × 1024 · KEYLINE</text>
+  </g>
+
+  <!-- ======== Protractor arc (left, bottom) ======== -->
+  <g stroke-opacity=".34" stroke-width="1.2" transform="translate(240 1700)">
+    <path d="M-150 0 A150 150 0 0 1 150 0 Z"/>
+    <path d="M-110 0 A110 110 0 0 1 110 0"/>
+    <path d="M0 0 L-106 -106 M0 0 L0 -150 M0 0 L106 -106 M0 0 L-130 -75 M0 0 L130 -75" stroke-opacity=".2"/>
+    <path d="M0 0 L120 -52" stroke-width="1.4" stroke-opacity=".6"/>
+    <path d="M60 0 A60 60 0 0 0 55 -24" stroke-opacity=".55"/>
+  </g>
+  <g fill="#a9caf2" fill-opacity=".55" stroke="none" transform="translate(240 1700)">
+    <text x="72" y="-12">23.4°</text>
+    <text x="-150" y="26" fill-opacity=".35">DET. D</text>
+  </g>
+
+  <!-- ======== Widget sizes, stacked (centre, upper) ======== -->
+  <g stroke-opacity=".3" stroke-width="1.2" transform="translate(470 210)">
+    <rect x="0" y="0" width="150" height="150" rx="24"/>
+    <rect x="170" y="0" width="320" height="150" rx="24"/>
+    <rect x="0" y="170" width="320" height="320" rx="24" stroke-dasharray="6 6"/>
+    <circle cx="75" cy="75" r="40" stroke-opacity=".25"/>
+  </g>
+
+  <!-- ======== Notes ======== -->
+  <g fill="#a9caf2" stroke="none">
+    <text x="820" y="1560" fill-opacity=".45">NOTES:</text>
+    <text x="820" y="1580" fill-opacity=".35">1. ALL DIMENSIONS IN POINTS UNLESS NOTED.</text>
+    <text x="820" y="1598" fill-opacity=".35">2. CORNERS CONTINUOUS (SQUIRCLE).</text>
+    <text x="820" y="1616" fill-opacity=".35">3. KEEP IT SIMPLE. THEN SIMPLER.</text>
+    <text x="1180" y="1890" fill-opacity=".3">REV 1.0</text>
+  </g>
+
+  <!-- ======== Big faint compass circle, spanning the middle ======== -->
+  <g stroke-opacity=".12" stroke-width="1">
+    <circle cx="760" cy="1340" r="260"/>
+    <circle cx="760" cy="1340" r="200" stroke-dasharray="2 8"/>
+    <path d="M760 1050 V1630 M470 1340 H1050"/>
+  </g>
+</svg>
