@@ -119,26 +119,18 @@
 
 * { box-sizing: border-box; }
 
-/* The paper: grid lines on the page itself, so it scrolls behind the fixed glass. */
+/* The paper, in three layers, back to front:
+   1. .paper-under: fixed, larger than the screen. Hidden behind the page,
+      it shows only when you scroll past the top or bottom (the bounce),
+      so the grid never ends in a plain color. site.js keeps its lines in
+      step with the page's.
+   2. body::before: the grid on the page itself, so it scrolls behind the fixed glass.
+   3. body::after: the technical drawings.
+   html keeps the plain paper color, for browsers that paint only a color there. */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
   background-color: var(--paper);
-  background-image:
-    linear-gradient(var(--line-major) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line-major) 1px, transparent 1px),
-    linear-gradient(var(--line-minor) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line-minor) 1px, transparent 1px),
-    radial-gradient(ellipse 120% 70% at 50% 0%, var(--paper-glow) 0%, var(--paper) 55%, var(--paper-edge) 100%);
-  background-size:
-    var(--major) var(--major),
-    var(--major) var(--major),
-    var(--minor) var(--minor),
-    var(--minor) var(--minor),
-    100% 100%;
-  background-position: center -1px, calc(50% - 1px) 0, center -1px, calc(50% - 1px) 0, 0 0;
-  background-repeat: repeat, repeat, repeat, repeat, no-repeat;
-  transition: background-color .4s;
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -154,9 +146,70 @@ body {
   overflow-x: hidden;
 }
 
+.paper-under,
+body::before {
+  background-color: var(--paper);
+  background-size:
+    var(--major) var(--major),
+    var(--major) var(--major),
+    var(--minor) var(--minor),
+    var(--minor) var(--minor),
+    100% 100%;
+  background-repeat: repeat, repeat, repeat, repeat, no-repeat;
+  pointer-events: none;
+  transition: background-color .4s;
+}
+
+.paper-under {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -50vh;
+  height: 200vh;   /* the screen, and half a screen above and below */
+  z-index: -3;
+  background-image:
+    linear-gradient(var(--line-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-major) 1px, transparent 1px),
+    linear-gradient(var(--line-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-minor) 1px, transparent 1px),
+    /* the glow at the top of the page, the darker edge at the bottom */
+    radial-gradient(ellipse 120% 30% at 50% 25%, var(--paper-glow) 0%, var(--paper) 55%, transparent 100%),
+    linear-gradient(var(--paper) 50%, var(--paper-edge) 75%);
+  background-size:
+    var(--major) var(--major),
+    var(--major) var(--major),
+    var(--minor) var(--minor),
+    var(--minor) var(--minor),
+    100% 100%,
+    100% 100%;
+  background-repeat: repeat, repeat, repeat, repeat, no-repeat, no-repeat;
+  /* --sy: how far the page is scrolled, modulo one major square (set by site.js) */
+  background-position:
+    center calc(50vh - 1px - var(--sy, 0px)),
+    calc(50% - 1px) 0,
+    center calc(50vh - 1px - var(--sy, 0px)),
+    calc(50% - 1px) 0,
+    0 0,
+    0 0;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--line-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-major) 1px, transparent 1px),
+    linear-gradient(var(--line-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-minor) 1px, transparent 1px),
+    radial-gradient(ellipse 120% 70% at 50% 0%, var(--paper-glow) 0%, var(--paper) 55%, var(--paper-edge) 100%);
+  background-position: center -1px, calc(50% - 1px) 0, center -1px, calc(50% - 1px) 0, 0 0;
+}
+
 /* The technical drawings, one copy per appearance (same drawing, different ink).
    To change the drawing, edit both sheet-light.svg and sheet-dark.svg. */
-body::before {
+body::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -166,9 +219,27 @@ body::before {
   background: url("sheet-light.svg") center top / 1440px 2000px repeat-y;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) body::before { background-image: url("sheet-dark.svg"); }
+  :root:not([data-theme="light"]) body::after { background-image: url("sheet-dark.svg"); }
 }
-:root[data-theme="dark"] body::before { background-image: url("sheet-dark.svg"); }
+:root[data-theme="dark"] body::after { background-image: url("sheet-dark.svg"); }
+
+/* App icons: Light and Dark versions, shown with the page's appearance. */
+.app-icon {
+  --icon: 72px;
+  display: block;
+  flex: none;
+  width: var(--icon);
+  height: var(--icon);
+  filter: drop-shadow(0 calc(var(--icon) / 12) calc(var(--icon) / 8) rgba(0, 0, 0, 0.28));
+}
+.app-icon img { width: 100%; height: 100%; }
+.app-icon .dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .app-icon .light { display: none; }
+  :root:not([data-theme="light"]) .app-icon .dark { display: block; }
+}
+:root[data-theme="dark"] .app-icon .light { display: none; }
+:root[data-theme="dark"] .app-icon .dark { display: block; }
 
 a { color: inherit; }
 img { max-width: 100%; display: block; }
@@ -434,13 +505,27 @@ h3 { font-size: 22px; line-height: 1.2; font-weight: 650; }
 .app-card { padding: 26px; display: flex; flex-direction: column; gap: 16px; min-height: 290px; }
 .app-card > * { position: relative; z-index: 2; }
 .app-card header { display: flex; align-items: center; gap: 16px; }
-.app-card .icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
-  flex: none;
-  box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.35);
+
+/* A card with details opens its panel when clicked. */
+.app-card[data-detail] { cursor: pointer; }
+.app-card .more {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  box-shadow: inset 0 0 0 1px var(--chip-border);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s;
 }
+.app-card .more svg { width: 14px; height: 14px; transition: transform .2s; }
+.app-card[data-detail]:hover .more { background: var(--hover); }
+.app-card[data-detail]:hover .more svg { transform: translateX(2px); }
 .app-card .platform {
   font-family: var(--mono);
   font-size: 11px;
@@ -532,7 +617,140 @@ h3 { font-size: 22px; line-height: 1.2; font-weight: 650; }
 .doc .panel, #about .panel, #contact .panel { --glass-blur: 14px; background-color: var(--reading-tint); }
 
 .app-heading { display: flex; align-items: center; gap: 14px; }
-.app-heading img { width: 48px; height: 48px; border-radius: 12px; flex: none; }
+
+/* ---------- Detail panel (an app's card, opened) ---------- */
+
+html.detail-open, html.detail-open body { overflow: hidden; }
+
+dialog.detail {
+  --glass-blur: 26px;
+  position: fixed;   /* .glass makes it relative; a panel stays on the screen */
+  inset: 0;
+  width: min(880px, 100% - 2 * var(--gutter));
+  max-width: none;
+  max-height: calc(100dvh - 2 * var(--gutter));
+  margin: auto;
+  padding: 0;
+  border: 0;
+  color: var(--ink);
+  background-color: var(--detail-tint);
+  overflow: hidden;
+}
+dialog.detail[open] { display: flex; flex-direction: column; animation: detail-in .34s cubic-bezier(.2, .8, .2, 1); }
+dialog.detail::backdrop {
+  background: rgba(10, 22, 40, 0.30);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: detail-fade .3s ease;
+}
+@keyframes detail-in { from { opacity: 0; transform: translateY(18px) scale(.98); } }
+@keyframes detail-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  dialog.detail[open], dialog.detail::backdrop { animation: none; }
+}
+
+:root { --detail-tint: rgba(244, 248, 253, 0.90); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --detail-tint: rgba(22, 29, 39, 0.90); } }
+:root[data-theme="dark"] { --detail-tint: rgba(22, 29, 39, 0.90); }
+
+.detail-scroll {
+  position: relative;
+  z-index: 2;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.detail-close-form { position: absolute; top: 14px; right: 14px; z-index: 3; margin: 0; }
+.detail-close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--chip-bg);
+  box-shadow: inset 0 0 0 1px var(--chip-border);
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.detail-close:hover { background: var(--hover); }
+.detail-close svg { width: 18px; height: 18px; }
+
+.detail-head { display: flex; align-items: center; gap: 22px; padding-right: 40px; }
+.detail-head .eyebrow { margin-bottom: 8px; }
+.detail-head h2 { margin: 0; }
+.detail-head .tagline { margin: 4px 0 12px; color: var(--ink-soft); font-size: 18px; }
+@media (max-width: 520px) { .detail-head { flex-direction: column; align-items: flex-start; gap: 16px; } }
+
+/* Screenshots: a row that swipes. Until there are pictures, empty drawing frames. */
+.shots {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(80%, 400px);
+  gap: 16px;
+  margin: 30px calc(-1 * clamp(24px, 4vw, 44px)) 0;
+  padding: 0 clamp(24px, 4vw, 44px) 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 clamp(24px, 4vw, 44px);
+  scrollbar-width: thin;
+}
+.shots.phone { grid-auto-columns: min(46%, 200px); }
+.shot { margin: 0; scroll-snap-align: start; }
+.shot img { width: 100%; border-radius: 14px; }
+.shot .frame {
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  border: 1.5px dashed var(--draft-line);
+  border-radius: 14px;
+  background:
+    linear-gradient(to top right, transparent calc(50% - .6px), var(--draft-line) 50%, transparent calc(50% + .6px)),
+    linear-gradient(to bottom right, transparent calc(50% - .6px), var(--draft-line) 50%, transparent calc(50% + .6px)),
+    var(--chip-bg);
+}
+.shots.phone .frame { aspect-ratio: 9 / 19.5; border-radius: 24px; }
+.shot .frame span {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--detail-tint);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.shot figcaption { margin-top: 8px; font-size: 13px; color: var(--ink-faint); }
+
+.detail-lede { margin: 28px 0 0; font-size: clamp(18px, 2vw, 20px); color: var(--ink-soft); }
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 28px;
+  margin-top: 28px;
+}
+@media (max-width: 620px) { .features { grid-template-columns: 1fr; } }
+.features h3, .detail-note h3 { font-size: 17px; margin-bottom: 4px; }
+.features p, .detail-note p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+
+.detail-note {
+  margin-top: 30px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: var(--chip-bg);
+  box-shadow: inset 0 0 0 1px var(--chip-border);
+}
+
+dialog.detail .facts { margin-top: 26px; border-top: 1px solid var(--hair); }
+
+.detail-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+@media (prefers-reduced-transparency: reduce) {
+  dialog.detail { background-color: var(--paper); }
+}
 
 /* ---------- Footer ---------- */
 

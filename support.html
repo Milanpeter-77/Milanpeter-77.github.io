@@ -12,6 +12,9 @@
 </head>
 <body>
 
+  <!-- The paper past the page's edges, seen when you scroll a little too far -->
+  <div class="paper-under" aria-hidden="true"></div>
+
   <nav class="nav glass" aria-label="Main">
     <a class="brand" href="index.html">Milan Peter</a>
     <a class="link" href="index.html#apps">Apps</a>
@@ -57,33 +60,60 @@
         </div>
       </section>
 
-      <section id="oneclicktranslate" data-sheet="OneClickTranslate" style="padding-top:20px">
+      <section id="quicktranslate" data-sheet="QuickTranslate" style="padding-top:20px">
         <div class="panel glass">
           <div class="app-heading">
-            <img src="assets/icons/oneclicktranslate.png" alt="" width="48" height="48">
-            <h2 style="margin:0">OneClickTranslate</h2>
+            <span class="app-icon" style="--icon:48px"><img class="light" src="assets/icons/quicktranslate-light.png" alt="" width="48" height="48"><img class="dark" src="assets/icons/quicktranslate-dark.png" alt="" width="48" height="48"></span>
+            <h2 style="margin:0">QuickTranslate</h2>
           </div>
-          <p class="muted" style="margin-top:12px">A Safari extension for the Mac that translates web pages with one click, on your Mac. OneClickTranslate is in beta: it works, and it's still getting better — your feedback helps a lot.</p>
+          <p class="muted" style="margin-top:12px">A Safari extension for the Mac that translates the page you're on with one click, on your Mac, without reloading it. QuickTranslate is coming soon to the Mac App Store — your feedback helps a lot.</p>
 
           <details>
             <summary>How do I turn on the extension?</summary>
-            <p>Open OneClickTranslate once, then in Safari choose <strong>Safari › Settings › Extensions</strong> and tick <strong>OneClickTranslate</strong>. Allow it on the websites you want to translate. Its button then appears in Safari's toolbar.</p>
+            <p>Open QuickTranslate and click <strong>Turn On in Safari…</strong>. In Safari's settings, tick <strong>QuickTranslate</strong> and allow it on the websites you want to translate. Its button then appears in Safari's toolbar.</p>
           </details>
           <details>
             <summary>How do I choose the language pages are translated into?</summary>
-            <p>Open the OneClickTranslate app and pick your language. The extension uses it right away.</p>
+            <p>Open the QuickTranslate app and choose it under <strong>Translate pages into</strong>. The extension uses it on your next click.</p>
           </details>
           <details>
-            <summary>The first translation of a language is slow.</summary>
-            <p>The first time you translate from a new language, macOS may need to download that language from Apple. After that it works offline and much faster. You can manage downloaded languages in <strong>System Settings › General › Language &amp; Region › Translation Languages</strong>.</p>
+            <summary>Is there a keyboard shortcut?</summary>
+            <p>Yes: <strong>⌥⇧T</strong> (Option-Shift-T) translates the page, and pressing it again puts the original back, the same as clicking the button.</p>
+          </details>
+          <details>
+            <summary>What do the letters on the toolbar button mean?</summary>
+            <ul>
+              <li><strong>An outlined circle with a language</strong> (FR, DE…): the page's language; the page can be translated.</li>
+              <li><strong>…</strong> (three dots): the page is being translated.</li>
+              <li><strong>A filled circle with your language</strong> (EN…): the page is translated. Click again for the original.</li>
+              <li><strong>A</strong>: the page's language isn't known yet or can't be translated, or you've turned the language off in the app (<strong>Show the language on the toolbar button</strong>).</li>
+            </ul>
+          </details>
+          <details>
+            <summary>How do I make translation faster?</summary>
+            <p>In the QuickTranslate app, under <strong>Fast languages</strong>, click <strong>Download a Language…</strong> and download the languages you read most. Pages in those languages then translate almost instantly, even offline, because QuickTranslate prepares the translation in the background before you click. Without a fast language, translation still works, but it's much slower.</p>
+            <p>To remove a downloaded language: <strong>System Settings › General › Language &amp; Region › Translation Languages</strong>.</p>
+          </details>
+          <details>
+            <summary>Why not Safari's own translate button?</summary>
+            <p>I built QuickTranslate because Safari's button doesn't work the way I wanted, in three ways:</p>
+            <ul>
+              <li><strong>It doesn't always appear.</strong> Safari often doesn't offer to translate a page, especially government websites. QuickTranslate's button is always there, and it detects the page's language by itself.</li>
+              <li><strong>It reloads the page.</strong> If you've started filling in a form, it's gone. QuickTranslate changes only the text, so what you typed stays.</li>
+              <li><strong>It takes more than one click.</strong> A menu opens first. QuickTranslate is one click, or ⌥⇧T.</li>
+            </ul>
           </details>
           <details>
             <summary>A page says it can't be translated.</summary>
             <p>Apple's translation doesn't support every language pair yet. If the page's language is supported and it still fails, please email me the page's address.</p>
           </details>
           <details>
+            <summary>Some text on the page isn't translated.</summary>
+            <p>QuickTranslate translates the page's text. Text inside images, inside embedded frames (like some ads and videos), and the hints in empty form fields stay as they are. A sentence split up by a link or bold text is translated in parts, so it can read less well. If a page doesn't translate well, I'd like to know: email me its address.</p>
+          </details>
+          <details>
             <summary>Does it send the pages I read anywhere?</summary>
-            <p>No. Translation happens on your Mac with Apple's built-in translation. See the <a href="privacy.html#oneclicktranslate">privacy policy</a>.</p>
+            <p>No. Translation happens on your Mac with Apple's built-in translation. See the <a href="privacy.html#quicktranslate">privacy policy</a>.</p>
           </details>
         </div>
       </section>

@@ -214,8 +214,15 @@
 
   function pad(n, len) { n = String(n); while (n.length < len) n = "0" + n; return n; }
 
+  // The paper under the page (see style.css): its lines follow the page's,
+  // also while bouncing past the top or bottom, where Safari reports a
+  // scroll position below 0 or past the end.
+  var under = document.querySelector(".paper-under");
+  var MAJOR = 120;
+
   function onScroll() {
     var y = window.scrollY;
+    if (under) under.style.setProperty("--sy", (((y % MAJOR) + MAJOR) % MAJOR).toFixed(1) + "px");
     if (layers.length) drift();
     if (yReadout) yReadout.textContent = pad(Math.round(y), 5);
 
@@ -249,6 +256,47 @@
   window.addEventListener("load", remeasure);       // after images and fonts
   if (window.ResizeObserver) new ResizeObserver(remeasure).observe(document.body);
   remeasure();
+
+  // ---------- 5. Detail panels: an app card opens its panel ----------
+
+  function openDetail(id) {
+    var d = document.getElementById(id);
+    if (!d || d.open || typeof d.showModal !== "function") return;
+    root.classList.add("detail-open");
+    d.showModal();
+    var scroller = d.querySelector(".detail-scroll");
+    if (scroller) scroller.scrollTop = 0;
+  }
+
+  document.querySelectorAll("dialog.detail").forEach(function (d) {
+    d.addEventListener("close", function () { root.classList.remove("detail-open"); });
+    // A click on the dimmed page around the panel closes it.
+    d.addEventListener("click", function (e) {
+      if (e.target !== d) return;
+      var r = d.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+      if (!inside) d.close();
+    });
+  });
+
+  document.querySelectorAll("[data-detail]").forEach(function (card) {
+    card.addEventListener("click", function (e) {
+      // Links and buttons inside the card keep their own click.
+      if (e.target.closest("a, button")) return;
+      openDetail(card.getAttribute("data-detail"));
+    });
+  });
+  document.querySelectorAll("[data-open]").forEach(function (b) {
+    b.addEventListener("click", function () { openDetail(b.getAttribute("data-open")); });
+  });
+
+  // A link to an app (…/#quicktranslate, as on its store page) opens its panel.
+  function openFromHash() {
+    var card = location.hash && document.getElementById(location.hash.slice(1));
+    if (card && card.hasAttribute("data-detail")) openDetail(card.getAttribute("data-detail"));
+  }
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
 
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

@@ -12,6 +12,9 @@
 </head>
 <body>
 
+  <!-- The paper past the page's edges, seen when you scroll a little too far -->
+  <div class="paper-under" aria-hidden="true"></div>
+
   <nav class="nav glass" aria-label="Main">
     <a class="brand" href="index.html">Milan Peter</a>
     <a class="link" href="index.html#apps">Apps</a>
@@ -45,7 +48,7 @@
         <p class="eyebrow">Privacy Policy</p>
         <h1>Your data stays yours.</h1>
         <p class="lede">The short version: my apps don't collect, sell or share your personal data. There are no accounts, no ads, no analytics and no tracking.</p>
-        <p class="updated">Last updated: 21 November 2026</p>
+        <p class="updated">Last updated: 28 November 2026</p>
 
         <div class="panel glass">
           <h2>Who I am</h2>
@@ -60,16 +63,16 @@
         </div>
       </section>
 
-      <section id="oneclicktranslate" data-sheet="OneClickTranslate" style="padding-top:20px">
+      <section id="quicktranslate" data-sheet="QuickTranslate" style="padding-top:20px">
         <div class="panel glass">
           <div class="app-heading">
-            <img src="assets/icons/oneclicktranslate.png" alt="" width="48" height="48">
-            <h2 style="margin:0">OneClickTranslate</h2>
+            <span class="app-icon" style="--icon:48px"><img class="light" src="assets/icons/quicktranslate-light.png" alt="" width="48" height="48"><img class="dark" src="assets/icons/quicktranslate-dark.png" alt="" width="48" height="48"></span>
+            <h2 style="margin:0">QuickTranslate</h2>
           </div>
           <ul style="margin-top:16px">
-            <li><strong>Web pages.</strong> When you click the button, the extension reads the text of the current page so it can be translated. Translation is done on your Mac by Apple's built-in Translation framework. The text is not sent to me or to any other service.</li>
-            <li><strong>Language models.</strong> The first time you translate from a new language, macOS may download that language from Apple. This is handled by macOS under <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple's privacy policy</a>.</li>
-            <li><strong>Settings.</strong> Your chosen language and display options are stored only on your Mac.</li>
+            <li><strong>Web pages.</strong> To detect each page's language and prepare its translation in advance, the extension reads the text of the pages you open in Safari, on the websites you allow it to use. This text goes only to Apple's Translation framework, which translates it on your Mac. It isn't stored, and it's never sent to me or to any other service.</li>
+            <li><strong>Language models.</strong> When you download a language, or translate from a new one, macOS may download it from Apple. This is handled by macOS under <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple's privacy policy</a>.</li>
+            <li><strong>Settings.</strong> Your chosen language and whether the toolbar button shows the page's language are stored only on your Mac.</li>
             <li><strong>Website access.</strong> Safari asks you which websites the extension may access. You can change this at any time in Safari › Settings › Extensions.</li>
           </ul>
         </div>

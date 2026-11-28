@@ -12,6 +12,9 @@
 </head>
 <body>
 
+  <!-- The paper past the page's edges, seen when you scroll a little too far -->
+  <div class="paper-under" aria-hidden="true"></div>
+
   <!-- Fixed glass: navigation -->
   <nav class="nav glass" aria-label="Main">
     <a class="brand" href="#cover">Milan Peter</a>
@@ -46,7 +49,7 @@
     <section id="cover" class="hero" data-sheet="Cover">
       <p class="eyebrow">Indie developer · iOS &amp; macOS</p>
       <h1>Apps I imagined,<br>built for <span class="mark">iPhone</span> and <span class="mark">Mac</span>.</h1>
-      <p class="lede">I'm Milan Peter, a creative thinker from Hungary, living in the Netherlands. I design and build apps the way I imagine them — first because I need them, and then I share them, because they might be useful to you too.</p>
+      <p class="lede">I'm Milan, a creative thinker from Hungary, living in the Netherlands. I design and build apps the way I imagine them — first because I need them, and then I share them, because they might be useful to you too.</p>
       <div class="spec">
         <a class="button glass" href="#apps"><span>See the apps</span></a>
         <span class="chip glass"><span class="dot"></span><span>2 apps on the drawing board</span></span>
@@ -61,30 +64,31 @@
 
       <div class="apps">
 
-        <article class="app-card glass" id="oneclicktranslate">
+        <article class="app-card glass" id="quicktranslate" data-detail="detail-quicktranslate">
           <header>
-            <img class="icon" src="assets/icons/oneclicktranslate.png" alt="OneClickTranslate app icon" width="72" height="72">
+            <span class="app-icon"><img class="light" src="assets/icons/quicktranslate-light.png" alt="QuickTranslate app icon" width="72" height="72"><img class="dark" src="assets/icons/quicktranslate-dark.png" alt="QuickTranslate app icon" width="72" height="72"></span>
             <div>
-              <h3>OneClickTranslate</h3>
+              <h3>QuickTranslate</h3>
               <div class="platform">macOS · Safari extension</div>
             </div>
           </header>
-          <p>Translate any web page in Safari with one click. It uses Apple's on-device translation, so the pages you read never leave your Mac.</p>
+          <p>Translate the page you're on in Safari with one click. No reload, no menus, and nothing leaves your Mac: it uses Apple's on-device translation.</p>
           <ul>
-            <li>One button in Safari's toolbar</li>
+            <li>One button in Safari's toolbar, or ⌥⇧T</li>
+            <li>No reload: forms keep what you typed</li>
             <li>Detects the page's language by itself</li>
-            <li>You choose the language to translate into</li>
           </ul>
           <footer>
-            <span class="status">Beta</span>
-            <a href="support.html#oneclicktranslate">Support</a>
-            <a href="privacy.html#oneclicktranslate">Privacy</a>
+            <span class="status">Coming soon</span>
+            <a href="support.html#quicktranslate">Support</a>
+            <a href="privacy.html#quicktranslate">Privacy</a>
+            <button class="more" type="button" data-open="detail-quicktranslate">Details<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </footer>
         </article>
 
-        <article class="app-card glass" id="widgetsplus">
+        <article class="app-card glass" id="widgetsplus" data-detail="detail-widgetsplus">
           <header>
-            <img class="icon" src="assets/icons/widgetsplus.png" alt="Widgets+ app icon" width="72" height="72">
+            <span class="app-icon"><img class="light" src="assets/icons/widgetsplus-light.png" alt="Widgets+ app icon" width="72" height="72"><img class="dark" src="assets/icons/widgetsplus-dark.png" alt="Widgets+ app icon" width="72" height="72"></span>
             <div>
               <h3>Widgets+</h3>
               <div class="platform">iOS · iPhone</div>
@@ -98,6 +102,7 @@
           </ul>
           <footer>
             <span class="status building">In development</span>
+            <button class="more" type="button" data-open="detail-widgetsplus">Details<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </footer>
         </article>
 
@@ -120,7 +125,7 @@
       <div class="two-col">
         <div class="panel glass">
           <h2>About</h2>
-          <p class="muted">Hi, I'm Milan. I'm from Hungary, and I live in the Netherlands.</p>
+          <p class="muted">Hi, I'm Milan Peter. I'm from Hungary, and I live in the Netherlands.</p>
           <p class="muted">I'm a creative thinker at heart. I love designing things and watching an idea in my head turn into something real. Apps are where I get to live that out: I build each one the way I imagine it, down to the small details.</p>
           <p class="muted">Most of them start with a need of my own. There's something I want to do on my Mac or my iPhone, so I look for an app, try a few, and none is quite right — not good enough for my standards. So I decided: if I need it, I build it.</p>
           <p class="muted">And if it's useful to me, it might be useful to you too. So I don't keep my apps to myself — I share them. I design, build and support every one, so if something doesn't work the way you expect, you'll be talking to the person who made it.</p>
@@ -154,6 +159,100 @@
     </section>
 
   </main>
+
+  <!-- Detail panels: open from an app card, over the page -->
+  <dialog class="detail glass" id="detail-quicktranslate" aria-labelledby="detail-quicktranslate-title">
+    <form method="dialog" class="detail-close-form"><button class="detail-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></form>
+    <div class="detail-scroll">
+      <header class="detail-head">
+        <span class="app-icon" style="--icon:96px"><img class="light" src="assets/icons/quicktranslate-light.png" alt="" width="96" height="96"><img class="dark" src="assets/icons/quicktranslate-dark.png" alt="" width="96" height="96"></span>
+        <div>
+          <p class="eyebrow">Detail · macOS · Safari extension</p>
+          <h2 id="detail-quicktranslate-title">QuickTranslate</h2>
+          <p class="tagline">One-click page translation, in Safari.</p>
+          <span class="status">Coming soon to the Mac App Store</span>
+        </div>
+      </header>
+
+      <div class="shots" aria-label="Screenshots">
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>A foreign page, the button showing NL</figcaption></figure>
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>The same page, translated: EN</figcaption></figure>
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>A half-filled form, translated, your text still there</figcaption></figure>
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>The settings window</figcaption></figure>
+      </div>
+
+      <p class="detail-lede">QuickTranslate puts a translate button in Safari's toolbar that's always there and always does one thing: translate the page you're on, right away.</p>
+
+      <div class="features">
+        <div><h3>One click</h3><p>Click the button, or press ⌥⇧T, and the page is translated in place. Click again and the original is back.</p></div>
+        <div><h3>No reload</h3><p>Only the text on the page changes. A form you've started filling in keeps everything you typed.</p></div>
+        <div><h3>Works on every page</h3><p>It detects each page's language by itself, so it also works on pages that don't say which language they're in, like many government websites.</p></div>
+        <div><h3>The language at a glance</h3><p>The toolbar button shows the page's language, three dots while it translates, and your language when it's done.</p></div>
+        <div><h3>Ready before you click</h3><p>Download the languages you read most, and their pages translate almost instantly, even offline. New text that appears while you read is translated too.</p></div>
+        <div><h3>Private by design</h3><p>Translation happens on your Mac with Apple's built-in translation. No account, no ads, no tracking.</p></div>
+      </div>
+
+      <div class="detail-note">
+        <h3>Why I built it</h3>
+        <p>Safari has its own translate button, but it often doesn't appear (government websites especially), it reloads the page, so a half-filled form is lost, and it opens a menu first. QuickTranslate fixes exactly these three things, and nothing more.</p>
+      </div>
+
+      <ul class="facts">
+        <li><span class="k">Requires</span><span class="v">macOS 26.4 or later · Safari</span></li>
+        <li><span class="k">Languages</span><span class="v">Every language Apple can translate</span></li>
+        <li><span class="k">Data collected</span><span class="v">None</span></li>
+      </ul>
+
+      <footer class="detail-links">
+        <a class="button glass" href="support.html#quicktranslate"><span>Support</span></a>
+        <a class="button glass" href="privacy.html#quicktranslate"><span>Privacy</span></a>
+        <a class="button glass" href="mailto:milan.peter.dev@icloud.com?subject=QuickTranslate"><span>Send feedback</span></a>
+      </footer>
+    </div>
+  </dialog>
+
+  <dialog class="detail glass" id="detail-widgetsplus" aria-labelledby="detail-widgetsplus-title">
+    <form method="dialog" class="detail-close-form"><button class="detail-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></form>
+    <div class="detail-scroll">
+      <header class="detail-head">
+        <span class="app-icon" style="--icon:96px"><img class="light" src="assets/icons/widgetsplus-light.png" alt="" width="96" height="96"><img class="dark" src="assets/icons/widgetsplus-dark.png" alt="" width="96" height="96"></span>
+        <div>
+          <p class="eyebrow">Detail · iOS · iPhone</p>
+          <h2 id="detail-widgetsplus-title">Widgets+</h2>
+          <p class="tagline">The widgets Apple's apps are missing.</p>
+          <span class="status building">In development</span>
+        </div>
+      </header>
+
+      <div class="shots phone" aria-label="Screenshots">
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>The Home Screen</figcaption></figure>
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>The Lock Screen</figcaption></figure>
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>All the widgets, by app</figcaption></figure>
+        <figure class="shot"><div class="frame"><span>Screenshot · to come</span></div><figcaption>A widget's settings</figcaption></figure>
+      </div>
+
+      <p class="detail-lede">Widgets+ adds more useful widgets for the apps that came with your iPhone — Calendar, Clock, Contacts, Fitness, Health, Maps, Reminders, Sleep, Weather and more — made to look exactly like Apple's own.</p>
+
+      <div class="features">
+        <div><h3>Home Screen</h3><p>Widgets in every size, in Light, Dark or Liquid Glass, with the same fonts, colors and layouts as Apple's.</p></div>
+        <div><h3>Lock Screen</h3><p>Circular, Rectangular and Inline widgets, made for a glance at the Lock Screen.</p></div>
+        <div><h3>Settings for every widget</h3><p>Each widget and size has its own settings: choose what it shows, how and for which calendar, list or place.</p></div>
+        <div><h3>Launchers</h3><p>Your favorite apps in one widget, as icons or tiles.</p></div>
+        <div><h3>Apple Watch</h3><p>Complications for the watch face, in color or tinted. Being built now.</p></div>
+        <div><h3>Your data stays yours</h3><p>Your calendars, health and contacts are read on your iPhone and never sent anywhere.</p></div>
+      </div>
+
+      <ul class="facts">
+        <li><span class="k">Requires</span><span class="v">iOS 26 or later</span></li>
+        <li><span class="k">Status</span><span class="v">In development · not on the App Store yet</span></li>
+        <li><span class="k">Data collected</span><span class="v">None</span></li>
+      </ul>
+
+      <footer class="detail-links">
+        <a class="button glass" href="mailto:milan.peter.dev@icloud.com?subject=Widgets%2B"><span>Ideas for a widget? Write to me</span></a>
+      </footer>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <span>© <span id="year">2026</span> Milan Peter</span>
